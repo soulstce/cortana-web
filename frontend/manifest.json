@@ -1,0 +1,9 @@
+{
+  "name": "Cortana Web",
+  "short_name": "Cortana",
+  "start_url": "/frontend/index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0f172a",
+  "icons": []
+}

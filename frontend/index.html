@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Cortana Web</title>
+    <link rel="manifest" href="/frontend/manifest.json" />
+    <link rel="stylesheet" href="/frontend/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <p class="eyebrow">Cortana Web</p>
+        <h1>Your assistant, in the browser.</h1>
+        <p class="subhead">A lightweight progressive web app paired with a simple Python backend.</p>
+      </header>
+
+      <section class="card">
+        <label for="message">Try a prompt</label>
+        <div class="input-row">
+          <input id="message" type="text" placeholder="Ask Cortana something..." autocomplete="off" />
+          <button id="sendButton" type="button">Send</button>
+        </div>
+        <pre id="response" class="response">Waiting for input…</pre>
+      </section>
+    </main>
+
+    <script src="/frontend/app.js" defer></script>
+  </body>
+</html>

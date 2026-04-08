@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#020617" />
+    <title>Cortana Web</title>
+    <meta name="description" content="A blue-and-black Cortana-style web app with a glowing orb and live chat endpoint." />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero card">
+        <div class="orb-wrap" aria-hidden="true">
+          <div class="orb"></div>
+          <div class="orb-ring"></div>
+        </div>
+        <p class="eyebrow">iOS Web App Architect</p>
+        <h1>Cortana Web</h1>
+        <p class="subtitle">Blue-black interface, glowing orb, and a live text endpoint.</p>
+        <div class="status-row">
+          <span class="status-dot" id="apiDot"></span>
+          <span id="apiStatus">Checking API…</span>
+        </div>
+      </section>
+
+      <section class="chat card">
+        <div id="messages" class="messages" aria-live="polite"></div>
+        <form id="composer" class="composer">
+          <input id="messageInput" name="message" type="text" placeholder="Text Cortana something…" autocomplete="off" />
+          <button id="sendButton" type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

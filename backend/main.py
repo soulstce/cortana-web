@@ -69,13 +69,15 @@ async def voice(packet: VoicePacket):
         data = await relay_to_poke(packet)
         return {
             'ok': True,
-            'reply': data.get('response') or data.get('reply') or data.get('tts') or packet.transcript or 'Voice loop received.',
+            'reply': data.get('reply') or data.get('response') or data.get('tts') or packet.transcript or 'Voice packet delivered.',
+            'audio': data.get('audio') or data.get('audioUrl') or data.get('ttsAudio') or data.get('speechAudio'),
+            'audioMimeType': data.get('audioMimeType') or data.get('mimeType'),
             'raw': data,
         }
     except Exception as exc:
         return {
             'ok': True,
-            'reply': f'Cortana heard: {packet.transcript}'.strip() if packet.transcript else 'Voice loop received.',
+            'reply': f'Heard: {packet.transcript}'.strip() if packet.transcript else 'Voice packet delivered.',
             'fallback': True,
             'error': str(exc),
         }
@@ -100,7 +102,9 @@ async def ws_endpoint(websocket: WebSocket):
             data = await relay_to_poke(packet)
             await websocket.send_text(json.dumps({
                 'type': 'reply',
-                'reply': data.get('response') or data.get('reply') or data.get('tts') or packet.transcript or 'Voice loop received.',
+                'reply': data.get('reply') or data.get('response') or data.get('tts') or packet.transcript or 'Voice packet delivered.',
+                'audio': data.get('audio') or data.get('audioUrl') or data.get('ttsAudio') or data.get('speechAudio'),
+                'audioMimeType': data.get('audioMimeType') or data.get('mimeType'),
                 'raw': data,
             }))
     except WebSocketDisconnect:

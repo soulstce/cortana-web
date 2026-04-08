@@ -5,7 +5,7 @@ const DEFAULT_TRIGGER_ID = '9b2309d7-cc85-4025-984c-1c872810feb3';
 async function relayToPoke(payload) {
   const body = {
     triggerId: payload.triggerId || DEFAULT_TRIGGER_ID,
-    transcript: payload.transcript || '',
+    transcript: String(payload.transcript || '').trim(),
     mimeType: payload.mimeType || 'audio/webm',
     audio: payload.audio || '',
     source: payload.source || 'cortana-web',
@@ -48,13 +48,15 @@ module.exports = async function handler(req, res) {
     const data = await relayToPoke(payload);
     return res.status(200).json({
       ok: true,
-      reply: data.response || data.reply || data.tts || transcript || 'Voice loop received.',
+      reply: data.reply || data.response || data.tts || transcript || 'Voice packet delivered.',
+      audio: data.audio || data.audioUrl || data.ttsAudio || data.speechAudio || null,
+      audioMimeType: data.audioMimeType || data.mimeType || null,
       raw: data,
     });
   } catch (error) {
     return res.status(200).json({
       ok: true,
-      reply: transcript ? 'Cortana heard: ' + transcript : 'Voice loop received.',
+      reply: transcript ? 'Heard: ' + transcript : 'Voice packet delivered.',
       fallback: true,
       error: error instanceof Error ? error.message : 'Voice relay unavailable.',
     });

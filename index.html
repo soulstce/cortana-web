@@ -2,47 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#020617" />
     <meta http-equiv="Permissions-Policy" content="microphone=(self)" />
     <title>Cortana Web</title>
-    <meta name="description" content="A futuristic Cortana-style web app with a centered holographic orb and voice loop." />
+    <meta name="description" content="A futuristic Cortana-style web app with a centered holographic orb and continuous voice loop." />
     <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <main class="app-shell">
-      <div class="scanlines" aria-hidden="true"></div>
-      <section class="topbar card">
+    <main class="shell">
+      <section class="hud hud-top card">
         <div>
-          <p class="eyebrow">iOS Web App Architect</p>
-          <h1>Cortana Web</h1>
-          <p class="subtitle">Centered holographic orb, hold-to-talk voice loop, and live Poke relay.</p>
+          <p class="eyebrow">Cortana Web</p>
+          <p class="headline">Centered holographic voice loop</p>
         </div>
         <div class="status-stack">
-          <span class="status-pill" id="secureStatus">Secure context required</span>
-          <span class="status-pill status-pill-muted" id="transportStatus">Connecting…</span>
+          <span id="secureStatus" class="pill">Secure context required</span>
+          <span id="micStatus" class="pill pill-muted">Waiting for microphone permission.</span>
+          <span id="transportStatus" class="pill pill-muted">Voice relay idle</span>
         </div>
       </section>
 
       <section class="orb-stage" aria-label="voice orb">
-        <button id="orbButton" class="orb-button" type="button" aria-label="Hold to talk">
+        <button id="orbButton" class="orb-button" type="button" aria-label="Toggle continuous listening">
+          <span class="orb-shell"></span>
           <span class="orb-core"></span>
           <span class="orb-ring orb-ring-a"></span>
           <span class="orb-ring orb-ring-b"></span>
           <span class="orb-ring orb-ring-c"></span>
-          <span class="orb-halo"></span>
+          <span class="orb-glow"></span>
         </button>
       </section>
 
-      <section class="bottom-dock card">
+      <section class="hud hud-bottom card">
         <div id="messages" class="messages" aria-live="polite"></div>
-        <div class="control-row">
-          <button id="talkButton" class="talk-button" type="button">Hold to Talk</button>
-          <div class="voice-copy">
-            <span id="micStatus" class="mic-status">Waiting for microphone permission.</span>
-            <span id="transcript" class="transcript">Say something to begin.</span>
-          </div>
+        <div class="footer-row">
+          <span id="loopState" class="loop-state">Tap the orb to enter continuous listening mode.</span>
+          <span id="transcript" class="transcript">Idle.</span>
         </div>
       </section>
     </main>

@@ -1,5 +1,4 @@
 from pathlib import Path
-import base64
 import json
 import os
 
@@ -40,7 +39,7 @@ async def relay_to_poke(payload: VoicePacket) -> dict:
         'source': payload.source,
     }
 
-    async with httpx.AsyncClient(timeout=30) as client:
+    async with httpx.AsyncClient(timeout=45) as client:
         response = await client.post(
             POKE_WEBHOOK_URL,
             headers={

@@ -4,32 +4,45 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#020617" />
+    <meta http-equiv="Permissions-Policy" content="microphone=(self)" />
     <title>Cortana Web</title>
-    <meta name="description" content="A blue-and-black Cortana-style web app with a glowing orb and voice loop." />
+    <meta name="description" content="A futuristic Cortana-style web app with a centered holographic orb and voice loop." />
     <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <main class="shell">
-      <section class="hero card">
-        <button id="orbButton" class="orb-wrap orb-button" type="button" aria-label="Hold to talk">
-          <span class="orb"></span>
-          <span class="orb-ring"></span>
-        </button>
-        <p class="eyebrow">iOS Web App Architect</p>
-        <h1>Cortana Web</h1>
-        <p class="subtitle">Hold to talk, record with MediaRecorder, and route the voice loop through Poke.</p>
-        <div class="status-row">
-          <span class="status-dot" id="apiDot"></span>
-          <span id="apiStatus">Voice ready</span>
+    <main class="app-shell">
+      <div class="scanlines" aria-hidden="true"></div>
+      <section class="topbar card">
+        <div>
+          <p class="eyebrow">iOS Web App Architect</p>
+          <h1>Cortana Web</h1>
+          <p class="subtitle">Centered holographic orb, hold-to-talk voice loop, and live Poke relay.</p>
+        </div>
+        <div class="status-stack">
+          <span class="status-pill" id="secureStatus">Secure context required</span>
+          <span class="status-pill status-pill-muted" id="transportStatus">Connecting…</span>
         </div>
       </section>
 
-      <section class="chat card">
+      <section class="orb-stage" aria-label="voice orb">
+        <button id="orbButton" class="orb-button" type="button" aria-label="Hold to talk">
+          <span class="orb-core"></span>
+          <span class="orb-ring orb-ring-a"></span>
+          <span class="orb-ring orb-ring-b"></span>
+          <span class="orb-ring orb-ring-c"></span>
+          <span class="orb-halo"></span>
+        </button>
+      </section>
+
+      <section class="bottom-dock card">
         <div id="messages" class="messages" aria-live="polite"></div>
-        <div class="voice-row">
+        <div class="control-row">
           <button id="talkButton" class="talk-button" type="button">Hold to Talk</button>
-          <span id="transcript" class="transcript">Say something to begin.</span>
+          <div class="voice-copy">
+            <span id="micStatus" class="mic-status">Waiting for microphone permission.</span>
+            <span id="transcript" class="transcript">Say something to begin.</span>
+          </div>
         </div>
       </section>
     </main>
